@@ -5,17 +5,19 @@ import com.redislabs.university.RU102J.api.MeterReading;
 import com.redislabs.university.RU102J.api.MetricUnit;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Tuple;
 
 import java.text.DecimalFormat;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Retain metrics using Redis sorted sets.
- *
+ * <p>
  * In this implementation, we use one sorted set per day for
  * up to 'MAX_METRIC_RETENTION_DAYS' days. Old sorted sets are expired
  * after this number of days.
@@ -51,6 +53,9 @@ public class MetricDaoRedisZsetImpl implements MetricDao {
         // START Challenge #2
         String metricKey = RedisSchema.getDayMetricKey(siteId, unit, dateTime);
         Integer minuteOfDay = getMinuteOfDay(dateTime);
+        MeasurementMinute measurementMinute = new MeasurementMinute(value, minuteOfDay);
+        jedis.zadd(metricKey, minuteOfDay, String.valueOf(measurementMinute));
+        jedis.expire(metricKey, METRIC_EXPIRATION_SECONDS);
         // END Challenge #2
     }
 

@@ -53,7 +53,7 @@ public class FeedDaoRedisImplTest {
     }
 
     // Challenge #6
-    @Ignore
+//    @Ignore
     @Test
     public void testBasicInsertReturnsRecent() {
         FeedDao dao = new FeedDaoRedisImpl(jedisPool);

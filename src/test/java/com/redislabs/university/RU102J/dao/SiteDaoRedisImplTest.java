@@ -20,6 +20,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.empty;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class SiteDaoRedisImplTest {
 
@@ -97,7 +98,7 @@ public class SiteDaoRedisImplTest {
      * Challenge #1 Part 1. Use this test case to
      * implement the challenge in Chapter 1.
      */
-    @Ignore
+//    @Ignore
     @Test
     public void findAllWithMultipleSites() {
         SiteDaoRedisImpl dao = new SiteDaoRedisImpl(jedisPool);
@@ -109,11 +110,17 @@ public class SiteDaoRedisImplTest {
         assertThat(dao.findAll(), is(sites));
     }
 
+//    @Test
+//    public void testQuizQuestion() {
+//        SiteDaoRedisImpl dao = new SiteDaoRedisImpl(jedisPool);
+//        dao.quizQuestion();
+//    }
+
     /**
      * Challenge #1 Part 2. Use this test case to
      * implement the challenge in Chapter 1.
      */
-    @Ignore
+//    @Ignore
     @Test
     public void findAllWithEmptySites() {
         SiteDaoRedisImpl dao = new SiteDaoRedisImpl(jedisPool);
